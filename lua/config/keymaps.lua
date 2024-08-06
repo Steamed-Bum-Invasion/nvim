@@ -9,6 +9,7 @@ local keymap = vim.keymap.set
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.g.have_nerd_font = true
 
 -- Modes
 --   normal_mode = "n",
