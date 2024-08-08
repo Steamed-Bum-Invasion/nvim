@@ -1,12 +1,29 @@
 return {
-  -- the colorscheme should be available when starting Neovim
-  {
+  { -- tokyonight colorscheme
     "folke/tokyonight.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
+    lazy = false,
+    priority = 1000,
     config = function()
       -- load the colorscheme here
-      vim.cmd([[colorscheme tokyonight]])
+      vim.cmd("colorscheme tokyonight")
+    end,
+  },
+  { -- catpuccin colorscheme
+    "catppuccin/nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- load colorscheme here
+      -- vim.cmd("colorscheme catppuccin")
+    end,
+  },
+  { -- nightfox colorscheme
+    "EdenEast/nightfox.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- load colorscheme here
+      -- vim.cmd("colorscheme catppuccin")
     end,
   },
 }

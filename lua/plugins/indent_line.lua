@@ -5,8 +5,10 @@ return {
     config = function()
       require("ibl").setup({
         enabled = true,
-        indent = { char = "|" },
+        indent = { char = "|", smart_indent_cap = true,tab_char = {"-"},},
         debounce = 100,
+        scope = {enabled = true, show_start = true, show_end = true}
+        
       })
     end,      
   },
