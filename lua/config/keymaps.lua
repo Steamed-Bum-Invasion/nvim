@@ -1,15 +1,9 @@
-local opts = { noremap = true, silent = true }
+-- KEYMAPS
 
-local term_opts = { silent = true }
-
--- Shorten function name
-local keymap = vim.keymap.set
-
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.have_nerd_font = true
+
+local keymap =  vim.keymap -- for conciseness
+local opts = { noremap = true, silent = true }
 
 -- Modes
 --   normal_mode = "n",
@@ -17,76 +11,41 @@ vim.g.have_nerd_font = true
 --   visual_mode = "v",
 --   visual_block_mode = "x",
 --   term_mode = "t",
---   command_mode = "c",
+--   command_mode = "c",      
 
--- Normal --
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+
+-- exit insert mode
+keymap.set("i", "jk", "<ESC>", opts,{ desc = "Exit insert mode with jk" })
+keymap.set("i", "kj", "<ESC>", opts,{ desc = "Exit insert mode with kj" })
+
+
+-- window management
+keymap.set("n", "<leader>sv", "<C-w>v", opts, { desc = "Split window vertically" })
+keymap.set("n", "<leader>sh", "<C-w>s", opts, { desc = "Split window horizontally" })
+keymap.set("n", "<leader>se", "<C-w>=", opts,  { desc = "Make splits equal size" })
+keymap.set("n", "<leader>sx", "<cmd>close<CR>", opts, { desc = "Close current split" })
+
+keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", opts, { desc = "Open new tab" })
+keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", opts, { desc = "Close current tab" })
+keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", opts,{ desc = "Go to next tab" })
+keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", opts,{ desc = "Go to previous tab" })
+keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", opts,{ desc = "Open current buffer in new tab" })
+
+
+ -- Better window navigation
+keymap.set("n", "<C-h>", "<C-w>h", opts, { desc = "move to left window" })
+keymap.set("n", "<C-j>", "<C-w>j", opts, { desc = "move to right window" })
+keymap.set("n", "<C-k>", "<C-w>k", opts, { desc = "move to down window" })
+keymap.set("n", "<C-l>", "<C-w>l", opts, { desc = "move to up window" })   
+
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap.set("n", "<leader>ru", ":resize +2<CR>", opts, { desc = "Resize up" })
+keymap.set("n", "<leader>rd", ":resize -2<CR>", opts, { desc = "Resize down" })
+keymap.set("n", "<leader>rr", ":vertical resize -2<CR>", opts, { desc = "Resize left" })
+keymap.set("n", "<leader>rl", ":vertical resize +2<CR>", opts, { desc = "Resize right" })
 
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
--- Move text up and down
-keymap("n", "<A-j>", ":m .+1<CR>==", opts)
-keymap("n", "<A-k>", ":m .-2<CR>==", opts)
-
--- Insert --
--- Press jk fast to exit insert mode
-keymap("i", "jk", "<ESC>", opts)
-keymap("i", "kj", "<ESC>", opts)
-
--- Visual --
--- Stay in indent mode
-keymap("v", "<", "<gv^", opts)
-keymap("v", ">", ">gv^", opts)
-
--- Move text up and down
-keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
-keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
-keymap("v", "p", '"_dP', opts)
-
--- Visual Block --
--- Move text up and down
-keymap("x", "J", ":m '>+1<CR>gv=gv", opts)
-keymap("x", "K", ":m '<-2<CR>gv=gv", opts)
-keymap("x", "<A-j>", ":m '>+1<CR>gv=gv", opts)
-keymap("x", "<A-k>", ":m '<-2<CR>gv=gv", opts)
-
--- Miscellaneous --
 
 -- removes highlight after search
-keymap("n", "<Esc>", "<cmd>nohlsearch<CR>")
+keymap.set("n", "<leader>nh", "<cmd>nohlsearch<CR>", { desc = "remove highlight" })
 
--- opens parent directory
-keymap("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
-
-vim.keymap.set("n", "<leader>q", "<cmd>q!<CR>", { desc = "Close Buffer" })
--- unused
-
--- Terminal --
--- Better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
