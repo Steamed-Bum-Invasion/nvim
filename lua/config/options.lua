@@ -10,35 +10,31 @@ opt.undofile = true -- enables persistent undo
 opt.virtualedit = "all" -- enables cursor to move anywhere
 opt.showmode = false -- removes mode information
 opt.scrolloff = 999 -- minimum number of lines to keep from top and bottom
+opt.sidescroll = 10 -- minimal number of screen columns either side of cursor if wrap is `false`
 opt.cursorline = true -- highlights current line
-
+vim.opt.iskeyword:append("-")
 
 -- clipboard
 opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 
-
 -- for wrap
 opt.wrap = false -- removes line wrapping
 opt.linebreak = true -- companion to wrap, don't split words
-
 
 -- for numberline
 opt.number = true -- enables line number
 opt.relativenumber = true -- enables relative line number
 opt.numberwidth = 4 -- increases width of numberline
 
-
 -- splits for windows
 opt.splitbelow = true -- force all horizontal splits to go below current window
 opt.splitright = true -- force all vertical splits to go to the right of current window
-
 
 -- tabs and indents
 opt.expandtab = true -- convert tabs to spaces, use <CTRL-V>TAB to use tab
 opt.tabstop = 2 -- number of spaces tabs expand into
 opt.shiftwidth = 2 -- number of spaces for each indent
 opt.swapfile = false -- prevent creation of swapfile
-
 
 -- cases for search
 opt.ignorecase = true -- ignores cases during search
