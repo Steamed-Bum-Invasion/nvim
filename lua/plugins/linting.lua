@@ -5,13 +5,13 @@ return {
 		local lint = require("lint")
 
 		lint.linters_by_ft = {
-			c = { "cpplint" },
-			["c++"] = { "cpplint" },
-			cmake = { "cmakelang" },
-			python = { "pylint" },
-			bash = { "shellcheck" },
-			markdown = { "markdownlint" },
-			latex = { "vale" },
+			-- c = { "cpplint" },
+			-- ["c++"] = { "cpplint" },
+			-- cmake = { "cmakelang" },
+			-- python = { "pylint" },
+			-- bash = { "shellcheck" },
+			-- markdown = { "markdownlint" },
+			-- latex = { "vale" },
 			-- lua = { "luacheck" },
 		}
 

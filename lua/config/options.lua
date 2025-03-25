@@ -39,3 +39,39 @@ opt.swapfile = false -- prevent creation of swapfile
 -- cases for search
 opt.ignorecase = true -- ignores cases during search
 opt.smartcase = true -- allows case based search
+
+-- highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
+
+-- text wrapping for md and text
+local group = vim.api.nvim_create_augroup("Markdown Wrap Settings", { clear = true })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*.md",
+	group = group,
+	callback = function()
+		vim.wo.wrap = true
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*.txt",
+	group = group,
+	callback = function()
+		vim.wo.wrap = true
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufLeave", {
+	pattern = "*",
+	group = group,
+	callback = function()
+		vim.wo.wrap = false
+	end,
+})

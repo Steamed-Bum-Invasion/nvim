@@ -5,6 +5,18 @@ return {
 		local lualine = require("lualine")
 		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
+		local function wordcount()
+			return tostring(vim.fn.wordcount().words) .. " words"
+		end
+
+		local function readingtime()
+			return tostring(math.ceil(vim.fn.wordcount().words / 200.0)) .. " min"
+		end
+
+		local function is_markdown()
+			return vim.bo.filetype == "markdown" or vim.bo.filetype == "asciidoc"
+		end
+
 		local colors = {
 			blue = "#65D1FF",
 			green = "#00FF7F",
@@ -61,6 +73,10 @@ return {
 						cond = lazy_status.has_updates,
 						color = { fg = "#ff9e64" },
 					},
+
+					{ wordcount, cond = is_markdown },
+					{ readingtime, cond = is_markdown },
+
 					{ "encoding" },
 					{ "fileformat" },
 					{ "filetype" },
